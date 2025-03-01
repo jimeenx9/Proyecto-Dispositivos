@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+
+<VBox alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.ficheros.AñadirController">
+    
+    <Label text="Añadir Nuevo Dispositivo" style="-fx-font-size: 18px;" />
+
+    <Label text="Tipo de Dispositivo:" />
+    <ChoiceBox fx:id="choiceTipo" />
+
+    <Label text="Marca:" />
+    <TextField fx:id="txtMarca" promptText="Ingrese la marca" />
+
+    <Label text="Modelo:" />
+    <TextField fx:id="txtModelo" promptText="Ingrese el modelo" />
+
+    <!-- Configuración de Ordenador -->
+    <Label text="RAM (GB):" />
+    <TextField fx:id="txtRam" promptText="Ingrese la RAM" disable="true" />
+
+    <Label text="Procesador:" />
+    <TextField fx:id="txtProcesador" promptText="Ingrese el procesador" disable="true" />
+
+    <Label text="Tamaño del Disco (GB):" />
+    <TextField fx:id="txtDisco" promptText="Ingrese el tamaño" disable="true" />
+
+    <Label text="Tipo de Disco (0=HDD, 1=SSD, 2=NVMe):" />
+    <TextField fx:id="txtTipoDisco" promptText="Ingrese el tipo" disable="true" />
+
+    <!-- Configuración de Impresora -->
+    <Label text="Tipo de Impresora (0=Láser, 1=Inyección de tinta):" />
+    <ChoiceBox fx:id="choiceTipoImpresora" disable="true" />
+
+    <HBox spacing="10">
+        <Label text="¿Tiene Color?" />
+        <CheckBox fx:id="checkColor" disable="true"/>
+    </HBox>
+
+    <HBox spacing="10">
+        <Label text="¿Tiene Escáner?" />
+        <CheckBox fx:id="checkScanner" disable="true"/>
+    </HBox>
+
+    <HBox spacing="10">
+        <Button fx:id="btnGuardar" text="Guardar" onAction="#guardarDispositivo" />
+        <Button fx:id="btnCancelar" text="Cancelar" onAction="#cerrarVentana" />
+    </HBox>
+</VBox>
