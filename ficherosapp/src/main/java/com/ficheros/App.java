@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 
 public class App extends Application {
 
@@ -15,11 +16,11 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 640, 480);
+        scene = new Scene(loadFXML("primary"), 850, 550);
         stage.setTitle("Gestor de Dispositivos");
 
-        // 📌 🔥 Agregar el ícono a la ventana principal
-        stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/ficheros/icono.png")));
+        // 📌 🔥 Aplica el ícono a la ventana principal
+        setAppIcon(stage);
 
         stage.setScene(scene);
         stage.show();
@@ -36,5 +37,19 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch();
+    }
+
+    // 📌 🔥 Método para establecer el ícono en cualquier ventana
+    public static void setAppIcon(Stage stage) {
+        try {
+            URL iconUrl = App.class.getResource("/com/ficheros/icono.png");
+            if (iconUrl != null) {
+                stage.getIcons().add(new Image(iconUrl.toString()));
+            } else {
+                System.out.println("⚠ No se encontró el icono en la ruta especificada.");
+            }
+        } catch (Exception e) {
+            System.out.println("⚠ Error al cargar el ícono: " + e.getMessage());
+        }
     }
 }

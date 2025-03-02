@@ -89,28 +89,11 @@ public class ModificarController {
         }
     }
 
-    // 📌 Método para agregar el ícono a la ventana
-    private void setIcono(Stage stage) {
-        try {
-            URL iconUrl = getClass().getResource("/com/ficheros/icono.png");
-            if (iconUrl != null) {
-                stage.getIcons().add(new Image(iconUrl.toString()));
-            } else {
-                System.out.println("⚠ No se encontró el icono en la ruta especificada.");
-            }
-        } catch (Exception e) {
-            System.out.println("⚠ Error al cargar el ícono: " + e.getMessage());
-        }
-    }
 
     // Método para cerrar la ventana y actualizar la UI principal
     @FXML
     private void cerrarVentana() {
         Stage stage = (Stage) txtID.getScene().getWindow();
-
-        // 🔥 Agregar ícono a la ventana antes de cerrarla
-        setIcono(stage);
-
         stage.close();
 
         // 🔥 Asegurar que la lista se actualiza en la interfaz principal

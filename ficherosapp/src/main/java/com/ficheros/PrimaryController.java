@@ -106,6 +106,7 @@ public class PrimaryController {
     
             Stage stage = new Stage();
             stage.setTitle("Añadir Nuevo Dispositivo");
+            App.setAppIcon(stage);
             stage.setScene(new Scene(root));
     
             // 🔥 Al cerrar la ventana, recargar la lista de dispositivos sí o sí
@@ -242,6 +243,7 @@ public class PrimaryController {
     
                     Stage stage = new Stage();
                     stage.setTitle("Modificar Dispositivo");
+                    App.setAppIcon(stage);
                     stage.setScene(new Scene(root));
     
                     // 🔥 Recargar datos tras cerrar la ventana
