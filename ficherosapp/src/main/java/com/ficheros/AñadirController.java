@@ -3,9 +3,7 @@ package com.ficheros;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import java.io.File;
-import java.io.IOException;
-import java.io.RandomAccessFile;
+
 
 public class AñadirController {
 
@@ -39,31 +37,6 @@ public class AñadirController {
         choiceTipoImpresora.setDisable(!esImpresora);
         checkColor.setDisable(!esImpresora);
         checkScanner.setDisable(!esImpresora);
-    }
-
-    private int generarNuevoID() {
-        File archivo = new File("dispositivos.dat");
-    
-        if (!archivo.exists()) {
-            return 1; // Si el archivo no existe, el primer ID será 1
-        }
-    
-        try (RandomAccessFile raf = new RandomAccessFile(archivo, "r")) {
-            int ultimoID = 0;
-    
-            while (raf.getFilePointer() < raf.length()) {
-                int idLeido = raf.readInt(); // Leemos el ID
-                raf.skipBytes(108); // Saltamos el resto del registro (112 bytes en total)
-                if (idLeido > ultimoID) {
-                    ultimoID = idLeido; // Guardamos el mayor ID encontrado
-                }
-            }
-    
-            return ultimoID + 1; // Retornamos el siguiente ID disponible
-        } catch (IOException e) {
-            mostrarError("Error al generar un nuevo ID: " + e.getMessage());
-            return -1;
-        }
     }
     
     @FXML

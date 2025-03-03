@@ -2,11 +2,7 @@ package com.ficheros;
 
 import java.io.*;
 
-import java.io.*;
-
-public class Ordenador extends Dispositivo implements Serializable { // ← AÑADIDO implements Serializable
-    private static final long serialVersionUID = 1L; // ← AÑADIDO para evitar problemas de serialización
-
+public class Ordenador extends Dispositivo {
     private int ram;
     private String procesador;
     private int tamDisco;
@@ -46,7 +42,6 @@ public class Ordenador extends Dispositivo implements Serializable { // ← AÑA
         return "ID ORDENADOR: " + getId() + "\n" + super.toString() + "\nProcesador: " + procesador + "\nMemoria RAM: " + ram + " GB\nAlmacenamiento: " +
                (tipoDisco == 0 ? "HDD " : tipoDisco == 1 ? "SSD " : tipoDisco == 2 ? "NVMe " : "Otros ") + tamDisco + " GB";
     }
-    
 
     // Método para guardar el ordenador en el archivo
     @Override

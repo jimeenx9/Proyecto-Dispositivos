@@ -2,9 +2,7 @@ package com.ficheros;
 
 import java.io.*;
 
-public class Impresora extends Dispositivo implements Serializable { // ← AÑADIDO implements Serializable
-    private static final long serialVersionUID = 1L; // ← AÑADIDO para evitar problemas de serialización
-    
+public class Impresora extends Dispositivo {
     private int tipo; // 0 = láser, 1 = inyección de tinta, 2 = otros
     private boolean color;
     private boolean tieneScanner;

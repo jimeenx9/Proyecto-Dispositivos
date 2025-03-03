@@ -8,10 +8,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox prefHeight="500.0" prefWidth="800.0" spacing="20.0" style="-fx-background-color: #8171dd; -fx-padding: 20px;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ficheros.PrimaryController">
+<HBox prefHeight="645.0" prefWidth="831.0" spacing="20.0" style="-fx-background-color: #8171dd; -fx-padding: 20px;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ficheros.PrimaryController">
 
     <!-- CONTENEDOR IZQUIERDO: Botones en lista -->
-    <VBox alignment="TOP_CENTER" prefWidth="230" spacing="15" style="-fx-background-color: #e0e0e0; -fx-padding: 20px; -fx-border-radius: 5px; -fx-background-radius: 5px;">
+    <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="224.0" spacing="15" style="-fx-background-color: #e0e0e0; -fx-padding: 20px; -fx-border-radius: 5px; -fx-background-radius: 5px;">
           
         <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333;" text="GESTOR" />
         <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333;" text="DE DISPOSITIVOS">
@@ -29,7 +29,9 @@
 
         <Button mnemonicParsing="false" onAction="#modificarDispositivo" style="-fx-background-color: #9C27B0; -fx-text-fill: white; -fx-font-size: 15px; -fx-padding: 10px; -fx-pref-width: 210px;" text="Modificar Dispositivo" />
 
-        <Button fx:id="btnEstado" mnemonicParsing="false" onAction="#cambiarEstado" style="-fx-background-color: #FFEB3B; -fx-text-fill: black; -fx-font-size: 15px; -fx-padding: 10px; -fx-pref-width: 210px;" text="🔄 Cambiar Estado" />
+        <Button mnemonicParsing="false" onAction="#cambiarEstado" style="-fx-background-color: #FFEB3B; -fx-text-fill: black; -fx-font-size: 15px; -fx-padding: 10px; -fx-pref-width: 210px;" text="🔄 Cambiar Estado" />
+
+        <Button mnemonicParsing="false" onAction="#restablecerDatos" style="-fx-background-color: #FF9800; -fx-text-fill: white; -fx-font-size: 15px; -fx-padding: 10px; -fx-pref-width: 210px;" text="🔄 Restablecer Datos" />
 
         <Button mnemonicParsing="false" onAction="#cerrarVentana" style="-fx-background-color: #607D8B; -fx-text-fill: white; -fx-font-size: 15px; -fx-padding: 10px; -fx-pref-width: 210px;" text="❌ Salir" />
 
@@ -39,7 +41,10 @@
     <VBox alignment="TOP_CENTER" prefWidth="550" spacing="15.0">
         <TextField fx:id="txtID" alignment="CENTER" prefHeight="35.0" prefWidth="530.0" promptText="Ingrese ID del dispositivo" style="-fx-font-size: 15px; -fx-border-color: #bbb; -fx-border-radius: 5px; -fx-background-radius: 5px;" />
 
-        <TextArea fx:id="txtSalida" prefHeight="459.0" prefWidth="530.0" style="-fx-font-size: 15px; -fx-border-color: #bbb; -fx-border-radius: 5px; -fx-background-radius: 5px;" wrapText="true" />
+        <TextArea fx:id="txtSalida" prefHeight="576.0" prefWidth="594.0" style="-fx-font-size: 15px; -fx-border-color: #bbb; -fx-border-radius: 5px; -fx-background-radius: 5px;" wrapText="true">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets></TextArea>
     </VBox>
 
 </HBox>

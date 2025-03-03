@@ -3,14 +3,12 @@ package com.ficheros;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -22,25 +20,8 @@ public class PrimaryController {
     private TextField txtID;
 
     @FXML
-    private Button btnAñadir, btnMostrar, btnBuscar, btnEliminar, btnModificar, btnEstado, btnSalir;
-
-    @FXML
     private TextArea txtSalida;
 
-    // 📌 Método para obtener la ruta del archivo de manera segura
-    private File obtenerArchivo() {
-        try {
-            URL url = getClass().getResource("/com/ficheros/dispositivos.dat");
-            if (url == null) {
-                System.out.println("Error: El archivo dispositivos.dat no fue encontrado en resources.");
-                return null;
-            }
-            return new File(url.toURI());
-        } catch (URISyntaxException e) {
-            System.out.println("Error de sintaxis en la URI del archivo: " + e.getMessage());
-            return null;
-        }
-    }
 
     public void cargarDatos() {
         listaDispositivos.clear();
@@ -90,8 +71,6 @@ public class PrimaryController {
         }
     }
     
-    
-
     @FXML
     private void añadirDispositivo() {
         try {
@@ -122,9 +101,6 @@ public class PrimaryController {
         }
     }
     
-    
-    
-
     @FXML
     public void mostrarDispositivos() {
         txtSalida.clear();
@@ -165,7 +141,6 @@ public class PrimaryController {
         txtSalida.setText("No se encontró ningún dispositivo con ID " + idBuscado);
     }
     
-
     @FXML
     private void eliminarDispositivo() {
         String idTexto = txtID.getText().trim();
@@ -218,8 +193,6 @@ public class PrimaryController {
         cargarDatos(); // 🔥 Aseguramos que la lista se actualiza después de eliminar
     }
     
-
-
     @FXML
     private void modificarDispositivo() {
         String idTexto = txtID.getText().trim();
@@ -264,13 +237,8 @@ public class PrimaryController {
         txtSalida.setText("No se encontró ningún dispositivo con ID " + idBuscado);
     }
     
-    
-
-
-
-
-@FXML
-private void cambiarEstado() {
+    @FXML
+    private void cambiarEstado() {
     String idTexto = txtID.getText().trim();
 
     if (idTexto.isEmpty() || !idTexto.matches("\\d+")) {
@@ -327,12 +295,41 @@ private void cambiarEstado() {
     mostrarDispositivos();
 }
 
-    
-
     @FXML
     private void cerrarVentana() {
         System.exit(0); // 🔥 Cierra completamente la aplicación
     }
+
+    @FXML
+    private void restablecerDatos() {
+        File dispositivosFile = new File("dispositivos.dat");
+        File ordenadoresFile = new File("ordenadores.dat");
+        File impresorasFile = new File("impresoras.dat");
+    
+        boolean dispositivosBorrado = dispositivosFile.delete();
+        boolean ordenadoresBorrado = ordenadoresFile.delete();
+        boolean impresorasBorrado = impresorasFile.delete();
+    
+        // 🔥 RECREAMOS LOS ARCHIVOS VACÍOS PARA REINICIAR LOS IDS
+        try {
+            dispositivosFile.createNewFile();
+            ordenadoresFile.createNewFile();
+            impresorasFile.createNewFile();
+        } catch (IOException e) {
+            txtSalida.setText("❌ Error al restablecer los archivos: " + e.getMessage());
+            return;
+        }
+    
+        if (dispositivosBorrado || ordenadoresBorrado || impresorasBorrado) {
+            txtSalida.setText("✔ Todos los datos han sido restablecidos.");
+            listaDispositivos.clear(); // 📌 Borra la lista en memoria
+        } else {
+            txtSalida.setText("⚠ No se encontraron archivos para borrar.");
+        }
+    }
+    
+    
+
     
     }
     

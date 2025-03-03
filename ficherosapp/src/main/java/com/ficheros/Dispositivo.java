@@ -58,32 +58,32 @@ public class Dispositivo {
     
     
     // Método para obtener el nuevo ID sumando 1 al mayor existente
-    protected static int obtenerNuevoId() {
-        File archivo = new File("dispositivos.dat");
-        if (!archivo.exists()) {
-            return 1; // Si el archivo no existe, el primer ID será 1
+    protected static int obtenerNuevoId() { // Este método es Static, no necesita una instancia de Dispositivo para ejecutarse
+        File archivo = new File("dispositivos.dat"); //Objeto File, representa el archivo donde guardamos los dispositivos
+        
+        // 🚀 Si el archivo está vacío, el primer ID es 1
+        if (!archivo.exists() || archivo.length() == 0) { //Comprobar si el archivo tiene tamaño 0 o existsss
+            return 1; // Significa que el primer dispositivo tendrá ID = 1;
         }
-    
-        int maxId = 0;
-        try (RandomAccessFile raf = new RandomAccessFile("dispositivos.dat", "r")) {
-            while (raf.getFilePointer() < raf.length()) {
-                int id = raf.readInt();
+        int ultimoId = 0;
+
+        try (RandomAccessFile raf = new RandomAccessFile(archivo, "r")) {
+            while (raf.getFilePointer() < raf.length()) { //Mientras raf.getFilePointer() sea menor que raf.length(), significa que todavía hay datos por leer
+                ultimoId = raf.readInt(); // Último ID leído
                 raf.readUTF(); // Marca
                 raf.readUTF(); // Modelo
                 raf.readBoolean(); // Estado
                 raf.readInt(); // Tipo
                 raf.readBoolean(); // Borrado
-                raf.readInt(); // idAjeno
-                if (id > maxId) maxId = id;
+                raf.readInt(); // ID Ajeno
             }
         } catch (IOException e) {
-            System.out.println("Error al obtener el ID: " + e.getMessage());
+            System.out.println("Error al obtener el nuevo ID: " + e.getMessage());
         }
-        return maxId + 1;
+    
+        return ultimoId + 1; // El siguiente ID disponible
     }
     
-    
-    // Método para guardar el dispositivo en el archivo
 // Método para actualizar o guardar el dispositivo en el archivo
 public int save() {
     File archivo = new File("dispositivos.dat");
@@ -102,7 +102,7 @@ public int save() {
             raf.readBoolean(); // Borrado
             raf.readInt(); // idAjeno
 
-            if (idLeido == this.id) { // 📌 Si el ID ya existe, actualizamos el registro
+            if (idLeido == this.id) { // 📌 Si el ID ya existe, actualizamos el registro (this.id para asegurarnos de que compara el ID del objeto actual)
                 raf.seek(pos); // Volvemos a la posición inicial para sobrescribir
                 escribirRegistro(raf);
                 actualizado = true;
@@ -112,9 +112,9 @@ public int save() {
         }
 
         // 📌 Si el ID no existía, lo añadimos al final
-        if (!actualizado) {
+        if (!actualizado) { //Si sigue false, significa que no se encontró el ID en el archivo
             raf.seek(raf.length()); // Ir al final del archivo
-            escribirRegistro(raf);
+            escribirRegistro(raf); //Escribimos el nuevo dispositivo en esa posición
             System.out.println("✔ Nuevo dispositivo con ID " + id + " guardado correctamente.");
         }
 
